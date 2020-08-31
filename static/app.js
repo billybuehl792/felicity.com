@@ -1,3 +1,4 @@
+// drop mobile navigation
 function mobileNav() {
     var burger = document.getElementById("burger");
     var nav = document.querySelector("nav");
@@ -14,19 +15,14 @@ function mobileNav() {
         bar3.classList.toggle("bar3-active");
     }
 
-    // activate social links
-    function activeSocial() {
-        var social = document.getElementById("social");
-    }
-
     burger.addEventListener('click', () => {
         activeBurger();
-        activeSocial();
         nav.classList.toggle("drop-nav");
         navContainer.classList.toggle("nav-container-active");
     });
 }
 
+// different class for active page
 function activeNav() {
     var navLinks = document.querySelectorAll(".nav-link");
     var currentPage = window.location.href;
