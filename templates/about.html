@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block body %}
+<div id="profile-container">
+    <img src="{{ url_for('static', filename='img/felicityGunn.png') }}" alt="Felicity Ann Gunn">
+    <div class="text-container">
+        <h2>Hi, I'm <span class="highlight">Felicity</span>.</h2>
+        <p>
+            Felicity Gunn is a senior at Ohio University and plans to graduate in May of 2020 with a BFA in 
+            studio art, a minor in business and a museum studies certificate. Felicity’s art explores the 
+            dynamic nature of line in combination with texture, form and value. Some of her favorite art 
+            forms include pen and ink drawings, screen print, letterpress, book art, and mono print. Her 
+            content explores subject matter such as architecture, plants, and landscape, as well as a focus on 
+            design through type and visual compositions made from letterforms.
+        </p>
+    </div>
+</div>
+{% endblock %}

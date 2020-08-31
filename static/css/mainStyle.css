@@ -1,0 +1,58 @@
+/* Body */
+body, a {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 200;
+    text-decoration: none;
+    color: black;
+}
+.highlight {
+    color: rgb(249, 182, 222);
+}
+
+/* Content */
+.content {
+    position: absolute;
+    right: 0;
+    width: calc(100vw - 200px);
+}
+
+/* About */
+#profile-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+#profile-container img {
+    width: 200px;
+    height: 200px;
+    margin-bottom: 10px;
+}
+.text-container {
+    width: 300px;
+    max-width: 100%;
+    text-align: center;
+}
+.text-container h2 {
+    font-size: 30px;
+    margin: 10px 0px;
+}
+.text-container p {
+    font-size: 14px;
+    line-height: 16px;
+}
+
+@media screen and (max-width: 500px){
+    .content {
+        top: 60px;
+        width: 100vw;
+    }
+    #profile-container {
+        height: calc(100vh - 60px);
+    }
+    #profile-container img {
+        width: 150px;
+        height: 150px;
+    }
+}
