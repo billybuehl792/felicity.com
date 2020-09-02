@@ -1,7 +1,4 @@
 body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
     width: 100vw;
     height: 100vh;
     font-family: 'Nunito', sans-serif;
@@ -9,6 +6,13 @@ body {
     background-color: rgb(211, 211, 211); 
 }
 .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+}
+.login-box {
     width: 250px;
     padding: 30px;
     background-color: white;
@@ -34,9 +38,10 @@ body {
     cursor: pointer;
     font-family: 'Work Sans', sans-serif;
 }
-.alert-danger {
+.alert-message {
     font-size: 13px;
     color: rgb(230, 16, 16);
+    margin-top: 3px;
 }
 .copyright {
     position: absolute;
@@ -45,4 +50,21 @@ body {
     text-align: center;
     font-size: 10px;
     color: rgb(116, 116, 116);
+}
+.site-link {
+    position: absolute;
+    top: 15px;
+    left: 10px;
+}
+.site-link a {
+    padding: 5px 10px;
+    color: black;
+    text-decoration: none;
+    border-radius: 10px;
+    transition: .2s ease;
+}
+.site-link a:hover {
+    background-color: black;
+    color: white;
+    transition: .2s ease;
 }

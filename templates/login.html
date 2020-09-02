@@ -10,31 +10,36 @@
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/loginStyle.css') }}" rel="stylesheet">
     </head>
     <body>
+        <div class="site-link">
+            <a href="{{ url_for('home') }}" class="nav-link">Back to site</a>
+        </div>
         <div class="container">
-            <h1 class="title">FG Admin Login</h1>
-            <form method="POST" action="">
-                {{ form.hidden_tag() }}
-                <div class="form-group">
-                    {{ form.user.label(class="form-control-label") }}
-                    {{ form.user(class="form-control-field")}}
-                </div>
-                <div class="form-group">
-                    {{ form.password.label(class="form-control-label") }}
-                    {{ form.password(class="form-control-field")}}
-                </div>
-                {% with messages = get_flashed_messages(with_categories=true) %}
-                    {% if messages %}
-                        {% for category, message in messages %}
-                            <div class="alert-{{ category }}">
-                                {{ message }}
-                            </div>
-                        {% endfor %}
-                    {% endif %}
-                {% endwith %}
-                <div class="form-group">
-                {{ form.login(class="submit-button")}}                    
-                </div>
-            </form>
+            <div class="login-box">
+                <h1 class="title">FG Admin Login</h1>
+                <form method="POST" action="">
+                    {{ form.hidden_tag() }}
+                    <div class="form-group">
+                        {{ form.user.label(class="form-control-label") }}
+                        {{ form.user(class="form-control-field")}}
+                    </div>
+                    <div class="form-group">
+                        {{ form.password.label(class="form-control-label") }}
+                        {{ form.password(class="form-control-field")}}
+                    </div>
+                    {% with messages = get_flashed_messages(with_categories=true) %}
+                        {% if messages %}
+                            {% for category, message in messages %}
+                                <div class="alert-{{ category }}">
+                                    {{ message }}
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+                    {% endwith %}
+                    <div class="form-group">
+                    {{ form.login(class="submit-button")}}                    
+                    </div>
+                </form>
+            </div>
         </div>
         <small class="copyright">© 2020, Felicity Ann Gunn</small>
     </body>

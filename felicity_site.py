@@ -7,7 +7,8 @@ from wtforms import StringField, PasswordField, SubmitField
 from wtforms.validators import DataRequired
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
-from flask_login import LoginManager, UserMixin
+from flask_login import LoginManager, UserMixin, login_user, \
+                        logout_user, current_user, login_required
 
 app = Flask(__name__)
 bcrypt = Bcrypt(app)
@@ -15,8 +16,13 @@ bcrypt = Bcrypt(app)
 app.config['SECRET_KEY'] = 'fbcaaa74745faa81274628eabbaffeda'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-
 db = SQLAlchemy(app)
+login_manager = LoginManager(app)
+login_manager.login_view = 'login'
+
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(int(user_id))
 
 
 # db objects
@@ -72,16 +78,25 @@ def login():
     form = LoginForm()
     if form.validate_on_submit():
         user = User.query.filter_by(username=form.user.data).first()
-        if user:
-            if bcrypt.check_password_hash(user.password, form.password.data):
-                return redirect(url_for('customize'))
+        if user and bcrypt.check_password_hash(user.password, form.password.data):
+            login_user(user)
+            return redirect(url_for('customize'))
 
-        flash('Username or password incorrect', 'danger')
+        flash('Username or password incorrect', 'message')
 
     return render_template('login.html', title='Login', form=form)
 
 
+@app.route('/logout', methods=['GET', 'POST'])
+@login_required
+def logout():
+    logout_user()
+    flash('You have been logged out', 'message')
+    return redirect(url_for('login'))
+
+
 @app.route('/customize', methods=['GET', 'POST'])
+@login_required
 def customize():
     return 'Customize'
 
