@@ -3,7 +3,8 @@
 
 from flask import Flask, flash, render_template, url_for, redirect
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField
+from flask_wtf.file import FileField, FileAllowed
+from wtforms import StringField, TextAreaField, PasswordField, SubmitField
 from wtforms.validators import DataRequired
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
@@ -19,6 +20,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 login_manager = LoginManager(app)
 login_manager.login_view = 'login'
+
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -36,14 +38,26 @@ class User(db.Model, UserMixin):
         return f'User("{self.username}", "{self.email}")'
 
 
-class Piece(db.Model):
+class Sketch(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    piece_name = db.Column(db.String(20), nullable=False)
-    piece_descr = db.Column(db.Text, nullable=False)
-    piece_img = db.Column(db.String(20), nullable=False)
+    date = db.Column(db.String(20), nullable=False)
+    title = db.Column(db.String(20), nullable=False)
+    descr = db.Column(db.Text, nullable=False)
+    image = db.Column(db.String(20), nullable=False)
 
     def __repr__(self):
-        return f'Piece("{self.piece_name}")'
+        return f'Sketch("{self.title}")'
+
+
+class ArtPiece(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    date = db.Column(db.String(20), nullable=False)
+    title = db.Column(db.String(20), nullable=False)
+    descr = db.Column(db.Text, nullable=False)
+    image = db.Column(db.String(20), nullable=False)
+
+    def __repr__(self):
+        return f'ArtPiece("{self.title}")'
 
 
 # forms
@@ -51,6 +65,14 @@ class LoginForm(FlaskForm):
     user = StringField('Username', validators=[DataRequired()])
     password = PasswordField('Password', validators=[DataRequired()])
     login = SubmitField('Login')
+
+
+class UploadForm(FlaskForm):
+    title = StringField('Piece Title', validators=[DataRequired()])
+    date = StringField('Piece Date', validators=[DataRequired()])
+    descr = TextAreaField('Piece Description', validators=[DataRequired()])
+    image = FileField('Image', validators=[FileAllowed(['jpg', 'png'])])
+    submit = SubmitField('Submit Piece')
 
 
 @app.route('/')
@@ -76,6 +98,8 @@ def sketchbook():
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     form = LoginForm()
+    nav = {'back to home': url_for('home')}
+
     if form.validate_on_submit():
         user = User.query.filter_by(username=form.user.data).first()
         if user and bcrypt.check_password_hash(user.password, form.password.data):
@@ -84,7 +108,23 @@ def login():
 
         flash('Username or password incorrect', 'message')
 
-    return render_template('login.html', title='Login', form=form)
+    return render_template('login.html', title='Login', form=form, nav=nav)
+
+
+@app.route('/upload-piece', methods=["GET", "POST"])
+@login_required
+def upload_piece():
+    form = UploadForm()
+    nav = {'back to customize': url_for('customize')}
+    return render_template('upload.html', title='Upload Piece', form=form, nav=nav)
+
+
+@app.route('/upload-sketch', methods=["GET", "POST"])
+@login_required
+def upload_sketch():
+    form = UploadForm()
+    nav = {'back to customize': url_for('customize')}
+    return render_template('upload.html', title='Upload Sketch', form=form, nav=nav)
 
 
 @app.route('/logout', methods=['GET', 'POST'])
