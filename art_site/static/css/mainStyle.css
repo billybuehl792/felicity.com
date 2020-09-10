@@ -1,22 +1,36 @@
-/* Body */
+/* GENERAL */
+:root {
+    --pink: rgb(249, 182, 222);
+    --white: rgb(240, 240, 240);
+    --dark: rgb(19, 19, 19);
+  }
+::-webkit-scrollbar { 
+    display: none; 
+}
+
+
+/* BODY */
 body, a {
     font-family: 'Nunito', sans-serif;
     font-weight: 200;
     text-decoration: none;
-    color: black;
+    color: var(--dark, black);
+    background-color: var(--white, white)
 }
 .highlight {
-    color: rgb(249, 182, 222);
+    color: var(--pink, pink);
 }
 
-/* Content */
+
+/* CONTENT */
 .content {
     position: absolute;
     right: 0;
     width: calc(100vw - 200px);
 }
 
-/* About */
+
+/* ABOUT */
 #profile-container {
     display: flex;
     flex-direction: column;
