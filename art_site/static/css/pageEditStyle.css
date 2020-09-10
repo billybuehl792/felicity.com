@@ -1,0 +1,30 @@
+body {
+    width: 100vw;
+    height: 100vh;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 300;
+    background-color: rgb(211, 211, 211); 
+}
+nav {
+    position: fixed;
+    top: 0;
+    width: 100vw;
+    line-height: 50px;
+    background-color: grey;
+}
+.nav-items {
+    float: right;
+    width: 400px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+.nav-items a {
+    text-decoration: none;
+    color: white;
+    transition: .2s ease;
+}
+.nav-items a:hover {
+    color: rgb(193, 193, 193);
+    transition: .2s ease;
+}

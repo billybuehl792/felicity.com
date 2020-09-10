@@ -1,0 +1,77 @@
+body {
+    width: 100vw;
+    height: 100vh;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 300;
+    background-color: rgb(211, 211, 211); 
+}
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+}
+.form-box {
+    width: 250px;
+    padding: 30px;
+    background-color: white;
+}
+.form-group {
+    margin-top: 15px;
+}
+.title {
+    text-align: center;
+    font-weight: 800;
+}
+.form-control-label {
+    font-size: 14px;
+}
+.form-control-field {
+    width: 100%;
+    height: 25px;
+    font-family: 'Work Sans', sans-serif;
+}
+.form-text-field {
+    min-width: 100%;
+    max-width: 100%;
+    max-height: 120px;
+    min-height: 120px;
+    font-family: 'Work Sans', sans-serif;
+}
+.submit-button {
+    width: 100%;
+    height: 40px;
+    cursor: pointer;
+    font-family: 'Work Sans', sans-serif;
+}
+.alert-message {
+    font-size: 13px;
+    color: rgb(230, 16, 16);
+    margin-top: 3px;
+}
+.copyright {
+    position: absolute;
+    bottom: 10px;
+    width: 100%;
+    text-align: center;
+    font-size: 10px;
+    color: rgb(116, 116, 116);
+}
+.site-link {
+    position: absolute;
+    top: 15px;
+    left: 10px;
+}
+.site-link a {
+    padding: 5px 10px;
+    color: black;
+    text-decoration: none;
+    border-radius: 10px;
+    transition: .2s ease;
+}
+.site-link a:hover {
+    background-color: black;
+    color: white;
+    transition: .2s ease;
+}
