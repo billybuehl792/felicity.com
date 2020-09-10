@@ -1,0 +1,47 @@
+>>> from felicity_site import db
+>>> db.create_all
+<bound method SQLAlchemy.create_all of <SQLAlchemy engine=sqlite:////Users/BillyBuehl/Dropbox/felicity.com/site.db>>
+>>> db.create_all()
+>>> from felicity_site import User, Piece
+>>> user_1 = User(username='Felice', email='fg419216@ohio.edu', password='password')
+>>> db.session.add(user_1)
+>>> user_2 = User(username='Billy', email='wb007814@ohio.edu', password='password')
+>>> db.session.add(user_2)
+>>> db.session.commit()
+>>> User.query.all()
+[User("Felice", "fg419216@ohio.edu"), User("Billy", "wb007814@ohio.edu")]
+>>> User.query.first()
+User("Felice", "fg419216@ohio.edu")
+>>> User.filter_by(username='Felice').all()
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+AttributeError: type object 'User' has no attribute 'filter_by'
+>>> User.query.filter_by(username='Felice').all()
+[User("Felice", "fg419216@ohio.edu")]
+>>> User.query.filter_by(username='Felice').first()
+User("Felice", "fg419216@ohio.edu")
+>>> user = User.query.filter_by(username='Felice').first()
+>>> user.id
+1
+>>> User.query.filter_by(username='Felice').second()
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+AttributeError: 'BaseQuery' object has no attribute 'second'
+>>> User.query.filter_by(username='Felice').all()[1]
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+IndexError: list index out of range
+>>> User.query.filter_by(username='Billy').first()
+User("Billy", "wb007814@ohio.edu")
+>>> user1 = User.query.filter_by(username='Billy').first()
+>>> user1.id()
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: 'int' object is not callable
+>>> user1.id
+2
+>>> User.query.get(1)
+User("Felice", "fg419216@ohio.edu")
+>>> db.drop_all()
+
+felice = User(username="felice", email="fg419216@ohio.edu", password=bcrypt.generate_password_hash('fofo_power!'))

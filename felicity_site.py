@@ -111,6 +111,20 @@ def login():
     return render_template('login.html', title='Login', form=form, nav=nav)
 
 
+@app.route('/logout', methods=['GET', 'POST'])
+@login_required
+def logout():
+    logout_user()
+    flash('You have been logged out', 'message')
+    return redirect(url_for('login'))
+
+
+@app.route('/customize', methods=['GET', 'POST'])
+@login_required
+def customize():
+    return render_template('pageEdit.html', title='Customize')
+
+
 @app.route('/upload-piece', methods=["GET", "POST"])
 @login_required
 def upload_piece():
@@ -125,20 +139,6 @@ def upload_sketch():
     form = UploadForm()
     nav = {'back to customize': url_for('customize')}
     return render_template('upload.html', title='Upload Sketch', form=form, nav=nav)
-
-
-@app.route('/logout', methods=['GET', 'POST'])
-@login_required
-def logout():
-    logout_user()
-    flash('You have been logged out', 'message')
-    return redirect(url_for('login'))
-
-
-@app.route('/customize', methods=['GET', 'POST'])
-@login_required
-def customize():
-    return 'Customize'
 
 
 if __name__ == '__main__':

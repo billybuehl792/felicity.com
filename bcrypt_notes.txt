@@ -1,0 +1,11 @@
+>>> from flask_bcrypt import Bcrypt
+>>> bcrypt = Bcrypt()
+>>> bcrypt.generate_password_hash('password').decode('utf-8')
+'$2b$12$K0BE8l/HJeYcDB/L2h6cHekpcZPHh0XKF1CVO6rmK6CPp4d3bpk9C'
+>>> bcrypt.generate_password_hash('password').decode('utf-8')
+'$2b$12$1XmJoawGAuEitNY5PX8dXOdZkzFmBS8M3q4BxEBfvR5sj1e69FSJu'
+>>> hashed_pw = bcrypt.generate_password_hash('password').decode('utf-8')
+>>> bcrypt.check_password_hash(hashed_pw, 'password')
+True
+>>> bcrypt.check_password_hash(hashed_pw, 'blah')
+False
